@@ -1,4 +1,4 @@
-﻿"""A football thrown off a cliff, driven by y(t) = 1/2 g t^2 + v0y t + y0.
+﻿"""A grenade thrown off a cliff, driven by y(t) = 1/2 g t^2 + v0y t + y0.
 
 Sequence: write the general equations, then pull each known value out of the
 picture one at a time (cliff height, launch velocity components, gravity from
@@ -62,7 +62,7 @@ from manim import (
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from physics_anim.kinematics import Projectile  # noqa: E402
-from physics_anim.props import cliff, football, nice_step  # noqa: E402
+from physics_anim.props import cliff, grenade, nice_step  # noqa: E402
 from physics_anim.vectors import (  # noqa: E402
     VectorSpec,
     animate_tip_to_tail,
@@ -211,7 +211,7 @@ class CliffThrow(Scene):
             # Behind the axes, so the y-axis ticks (at x = 0, the cliff edge) stay visible.
             rock = cliff(axes, self.x_min, p.y0).set_z_index(-1)
             self.play(FadeIn(rock, shift=UP * 0.3))
-        self.ball = football().move_to(axes.c2p(0, p.y0))
+        self.ball = grenade(axes.c2p(0, p.y0), math.atan2(p.vy(0), p.vx(0)))
         self.play(FadeIn(self.ball, scale=0.5))
 
     # --- pulling the givens out of the picture ------------------------- #
@@ -295,7 +295,7 @@ class CliffThrow(Scene):
             arrow = velocity_arrow(pos, 0, shown_vy, scale, Y_COLOR, stroke_width=5)
             anims = [GrowArrow(arrow)] if isinstance(arrow, Arrow) else []
             if t > 0:
-                ghost = football().rotate(math.atan2(vy, p.vx(t))).move_to(pos).set_opacity(0.5)
+                ghost = grenade(pos, math.atan2(vy, p.vx(t)), opacity=0.5)
                 ghosts.add(ghost)
                 anims.append(FadeIn(ghost))
             path_arrows.append(arrow)
@@ -406,9 +406,8 @@ class CliffThrow(Scene):
         def ball_point():
             return axes.c2p(*p.position(t.get_value()))
 
-        ball = always_redraw(lambda: football()
-                             .rotate(math.atan2(p.vy(t.get_value()), p.vx(t.get_value())))
-                             .move_to(ball_point()))
+        ball = always_redraw(lambda: grenade(
+            ball_point(), math.atan2(p.vy(t.get_value()), p.vx(t.get_value()))))
         path = always_redraw(lambda: axes.plot_parametric_curve(
             lambda s: np.array(p.position(s)),
             t_range=[0, max(t.get_value(), 1e-3), max(t.get_value(), 1e-3) / 60],

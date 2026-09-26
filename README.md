@@ -12,7 +12,7 @@ To recreate the venv: `C:\Users\rickg\anaconda3\python.exe -m venv .venv` then `
 
 ## Cliff throw
 
-A football thrown off a cliff, using
+A grenade thrown off a cliff, using
 
     y(t) = 1/2 g t^2 + v0y t + y0        x(t) = v0x t
 
@@ -34,7 +34,7 @@ The animation does this:
 3. Pulls each known value out of the picture, one at a time, into a list under the equations. The matching symbol in the equation flashes as each one arrives:
    - `y0`: a measuring arrow up the cliff.
    - `v0y`, then `v0x`: arrows grown at the ball. With `--launch-vectors`, they then slide tip to tail into `v0` and its angle θ.
-   - `g`: ghost footballs at equal time steps along the upcoming path, each with its `v_y` arrow. The arrows collect into a `v_y` vs `t` chart where every step is the same `Δv_y`, which gives `g = Δv_y / Δt`.
+   - `g`: ghost grenades at equal time steps along the upcoming path, each with its `v_y` arrow. The arrows collect into a `v_y` vs `t` chart where every step is the same `Δv_y`, which gives `g = Δv_y / Δt`.
 4. Plugs each value into the equation in place of its symbol.
 5. Flies the ball with live `v_x`, `v_y` and `v` vectors, a trail and a readout, pausing at the top (where `v_y = 0`).
 6. At impact, flashes and boxes the final readout. With `--impact-vectors`, it also builds the same component diagram for the final velocity `v_f`.
@@ -44,6 +44,6 @@ The animation does this:
 - `kinematics.Projectile`: pure physics. Gives `x(t)`, `y(t)`, `vx(t)`, `vy(t)`, `t_land`, `x_land`, `t_apex`, `y_max`, `speed(t)` and `angle_deg(t)`.
 - `vectors.animate_tip_to_tail(scene, origin, [VectorSpec, ...], scale, ...)`: animates the addition of any number of vectors, not only x/y components. Also useful for forces and displacements. Pass `end_at=` to place the diagram so the resultant ends at a point.
 - `vectors.make_vector`, `velocity_arrow`, `angle_marker`, `tex_label`: building blocks for arrows with labels.
-- `props.football`, `props.cliff`, `props.nice_step`: scenery and tick spacing.
+- `props.grenade`, `props.cliff`, `props.nice_step`: scenery and tick spacing.
 
 Note: rendering several scenes in parallel can make MiKTeX fail with a `dvisvgm` error. Render one at a time.
