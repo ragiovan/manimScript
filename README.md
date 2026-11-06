@@ -8,7 +8,7 @@ Physics animations with [Manim Community](https://www.manim.community/) (v0.21).
 - LaTeX comes from MiKTeX (`winget install MiKTeX.MiKTeX`). It installs missing LaTeX packages on first use.
 - ffmpeg is on PATH.
 
-To recreate the venv: `C:\Users\rickg\anaconda3\python.exe -m venv .venv` then `.venv\Scripts\python -m pip install -r requirements.txt`.
+To recreate the venv run `python.exe -m venv .venv` then `.venv\Scripts\python -m pip install -r requirements.txt`.
 
 ## Cliff throw
 
